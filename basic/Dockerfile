@@ -11,11 +11,9 @@ COPY ./config/start.sh /start.sh
 RUN chmod +x /start.sh
 
 RUN groupadd -r ds && useradd --no-log-init -s /bin/bash -d /home/ds1 -m -G sudo ds1
-RUN runuser -l ds1 -c "mkdir ~/.jupyter"
-COPY ./config/jupyter_notebook_config.json /home/ds1/.jupyter/jupyter_notebook_config.json
-RUN chown ds1 /home/ds1/.jupyter/jupyter_notebook_config.json
 
 EXPOSE 8888
-ENTRYPOINT runuser -l ds1 -c "/opt/conda/bin/jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser & /bin/bash"
+CMD /bin/bash /start.sh
+CMD runuser -l ds1 -c "/opt/conda/bin/jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser"
 
 ADD VERSION .
