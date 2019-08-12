@@ -1,4 +1,4 @@
-FROM tiangolo/python-machine-learning:python3.7
+FROM python:3.7.4
 MAINTAINER Selim Raboudi (selim.raboudi@gmail.com)
 
 RUN apt-get update
