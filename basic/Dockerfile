@@ -1,10 +1,10 @@
 FROM python:3.7.4
 MAINTAINER Selim Raboudi (selim.raboudi@gmail.com)
 
-RUN apt-get update
-RUN apt-get upgrade -y
+#RUN apt-get update
+#RUN apt-get upgrade -y
 
-RUN apt install python3-pip
+RUN apt-get install -y python3-pip
 RUN pip install pandas jupyter scikit-learn
 
 RUN mkdir __PATH_DOCKER_WD__
