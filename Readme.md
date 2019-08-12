@@ -20,7 +20,7 @@ Install Docker >=19.03. For that you can run
 ## Build the image
 
 Open build.sh and modify:
-- `PATH_HOST_WD` to the working directory  on your local machine
+- `PATH_HOST_WD` to the working directory on your local machine (default: your home directory)
 - `JUPYTER_NOTEBOOK_PORT_ON_HOST` if you want jupyter to be exposed on your host on another port than 8888
 
 Then run the script
@@ -30,16 +30,19 @@ Then run the script
 
 ## Run the image
 
+
 ```
 docker run \
   -it \
   -p 8888:8888 \
-  --rm --name container_name \
+  --rm --name ds-env \
   --mount type=bind,source="path_host_wd",target="/root/ds-env-data" \
-  ds-env:basic
+  selimr/ds-env:basic
 ```
+* `path_host_wd`: working directory path on your local machine
 
-Alternatively if you have built the Docker Image locally, simply do
+
+Alternatively if you have built the Docker Image locally, simply do as a shorthand
 ```
 ./run.sh
 ```
