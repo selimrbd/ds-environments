@@ -4,7 +4,7 @@ MAINTAINER Selim Raboudi (selim.raboudi@gmail.com)
 RUN apt-get update
 RUN apt-get upgrade -y
 
-RUN conda install -y pandas jupyter scikit-learn
+RUN pip install -y pandas jupyter scikit-learn
 
 RUN mkdir __PATH_DOCKER_WD__
 RUN jupyter notebook --generate-config
