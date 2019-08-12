@@ -4,11 +4,23 @@ Off-the-shelf development environments for data science using Docker.
 - **basic:** Basic python tools for data science (pandas, scikit-learn, jupyter notebooks...)
 - **deep:** Basic DS environment + deep learning tools and frameworks with GPU compatibility
 
+## Motivation
+
+Having to re-install your data science environment on a new machine can be painful and time-consuming. It can also be challenging to share a notebook with colleagues that might not have all the dependencies necessary to make it run. It's especially true for deep learning frameworks that require many system dependencies such as CUDA, CudNN, etc.. By encapsulating your development environment in a Docker image, you make it portable and transparent. Easy to redeploy and share !
+
+## Prerequisites
+
+Have docker installed.
 
 ## Get Image from Docker Hub
 
 ## Build the image
 
+Open build.sh and modify:
+- `PATH_HOST_WD` to the working directory  on your local machine
+- `JUPYTER_NOTEBOOK_PORT_ON_HOST` if you want jupyter to be exposed on your host on another port than 8888
+
+Then run the script
 ```
 ./build.sh
 ```
@@ -16,8 +28,20 @@ Off-the-shelf development environments for data science using Docker.
 ## Run the image
 
 ```
+docker run \
+  -it \
+  -p 8888:8888 \
+  --rm --name container_name \
+  --mount type=bind,source="path_host_wd",target="/root/ds-env-data" \
+  ds-env:basic
+```
+
+Alternatively if you have built the Docker Image locally, simply do
+```
 ./run.sh
 ```
+
+**NOTE: The default password for the jupyter notebook is 'ds'**
 
 ## Modify the image
 
