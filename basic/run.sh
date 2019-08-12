@@ -1,10 +1,7 @@
 #! /bin/bash
-path_wd=~/datascience/notebooks
-container_name=ds-env-basic
-
 docker run \
-  -d \
-  -p 8888:8888 \
-  --rm --name $container_name \
-  --mount type=bind,source="$path_wd",target=/home/ds1 \
-  ds-env:basic
+  -it \
+  -p 8888:__JUPYTER_NOTEBOOK_PORT_ON_HOST__ \
+  --rm --name __CONTAINER_NAME__ \
+  --mount type=bind,source="__PATH_HOST_WD__",target="__PATH_DOCKER_WD__" \
+  __IMAGE_NAME__
