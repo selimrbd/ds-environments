@@ -10,7 +10,10 @@ Having to re-install your data science environment on a new machine can be painf
 
 ## Prerequisites
 
-Have docker installed.
+Install Docker >=19.03. For that you can run
+```
+./install_docker.sh
+```
 
 ## Get Image from Docker Hub
 
