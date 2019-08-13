@@ -5,6 +5,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 RUN pip install pandas scikit-learn keras
+RUN pip install seaborn Pillow
 
 RUN mkdir __PATH_DOCKER_WD__
 RUN jupyter notebook --generate-config
