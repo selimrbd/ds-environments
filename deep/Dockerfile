@@ -3,7 +3,7 @@ MAINTAINER Selim Raboudi (selim.raboudi@gmail.com)
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install git
+RUN apt-get install git -y
 
 RUN pip install --upgrade pip
 RUN pip install pandas scikit-learn 'keras==2.1.6' seaborn Pillow pathlib fire
