@@ -3,6 +3,7 @@ MAINTAINER Selim Raboudi (selim.raboudi@gmail.com)
 
 RUN apt-get update
 RUN apt-get upgrade -y
+RUN apt-get install git
 
 RUN apt-get install -y python3-pip
 RUN pip install --upgrade pip
