@@ -6,7 +6,7 @@ RUN apt-get upgrade -y
 
 RUN apt-get install -y python3-pip
 RUN pip install --upgrade pip
-RUN pip install pandas jupyter scikit-learn pathlib
+RUN pip install pandas jupyter scikit-learn pathlib fire
 
 ## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
 RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
