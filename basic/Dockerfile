@@ -4,18 +4,20 @@ MAINTAINER Selim Raboudi (selim.raboudi@gmail.com)
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install git -y
-
 RUN apt-get install -y python3-pip
-RUN pip install --upgrade pip
-RUN pip install pandas jupyter scikit-learn pathlib fire
-
-## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
-RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
 
 ## create user with same name/id as the host
 RUN groupadd -g __GROUP_ID__ __GROUP_NAME__ &&\
     useradd -l -u __USER_ID__ -g __GROUP_NAME__ __USER_NAME__ &&\
     install -d -m 0755 -o __USER_NAME__ -g __GROUP_NAME__ /home/__USER_NAME__
+
+
+RUN runuser -l __USER_NAME__ -- pip install --upgrade pip
+RUN runuser -l __USER_NAME__ -- pip install pandas jupyter scikit-learn pathlib fire
+
+## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
+RUN runuser -l __USER_NAME__ -- pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
+
 
 #RUN mkdir __PATH_DOCKER_WD__
 #RUN jupyter notebook --generate-config
