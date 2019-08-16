@@ -1,15 +1,16 @@
 FROM python:3.7.4
 MAINTAINER Selim Raboudi (selim.raboudi@gmail.com)
 
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install git -y
-RUN apt-get install -y python3-pip
-
 ## create user with same name/id as the host
 RUN groupadd -g __GROUP_ID__ __GROUP_NAME__ &&\
     useradd -l -u __USER_ID__ -g __GROUP_NAME__ __USER_NAME__ &&\
+    usermod -aG sudo __USER_NAME__ &&\
     install -d -m 0755 -o __USER_NAME__ -g __GROUP_NAME__ /home/__USER_NAME__
+
+RUN runuser -l __USER_NAME__ -c "apt-get update"
+RUN runuser -l __USER_NAME__ -c "apt-get upgrade -y"
+RUN runuser -l __USER_NAME__ -c "apt-get install git -y"
+RUN runuser -l __USER_NAME__ -c "apt-get install -y python3-pip"
 
 RUN runuser -l __USER_NAME__ -c "pip install --upgrade pip"
 RUN runuser -l __USER_NAME__ -c "pip install pandas jupyter scikit-learn pathlib fire"
