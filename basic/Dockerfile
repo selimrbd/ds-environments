@@ -7,11 +7,10 @@ RUN groupadd -g __GROUP_ID__ __GROUP_NAME__ &&\
     usermod -aG sudo __USER_NAME__ &&\
     install -d -m 0755 -o __USER_NAME__ -g __GROUP_NAME__ /home/__USER_NAME__
 
-RUN runuser -l __USER_NAME__ -c "apt-get update"
-RUN runuser -l __USER_NAME__ -c "apt-get upgrade -y"
-RUN runuser -l __USER_NAME__ -c "apt-get install git -y"
-RUN runuser -l __USER_NAME__ -c "apt-get install -y python3-pip"
-
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN runuser -l __USER_NAME__ -c "sudo apt-get install git -y"
+RUN runuser -l __USER_NAME__ -c "sudo apt-get install -y python3-pip"
 RUN runuser -l __USER_NAME__ -c "pip install --upgrade pip"
 RUN runuser -l __USER_NAME__ -c "pip install pandas jupyter scikit-learn pathlib fire"
 
