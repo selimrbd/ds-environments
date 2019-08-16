@@ -17,8 +17,9 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install git python3-pip -y
 
-RUN runuser -l __USER_NAME__ -c "pip install --upgrade pip"
-RUN runuser -l __USER_NAME__ -c "pip install pandas jupyter scikit-learn pathlib fire"
+RUN runuser -l __USER_NAME__ -c "pip install jupyter"
+#RUN runuser -l __USER_NAME__ -c "pip install --upgrade pip"
+#RUN runuser -l __USER_NAME__ -c "pip install pandas jupyter scikit-learn pathlib fire"
 #RUN pip install --upgrade pip
 #RUN pip install pandas jupyter scikit-learn pathlib fire
 
