@@ -11,11 +11,13 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install git python3-pip -y
 
-RUN runuser -l __USER_NAME__ -c "pip install --user --upgrade pip"
-RUN runuser -l __USER_NAME__ -c "pip install --user pandas jupyter scikit-learn pathlib fire"
+#RUN runuser -l __USER_NAME__ -c "pip install --user --upgrade pip"
+#RUN runuser -l __USER_NAME__ -c "pip install --user pandas jupyter scikit-learn pathlib fire"
+RUN pip install --upgrade pip
+RUN pip install pandas jupyter scikit-learn pathlib fire
 
 ## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
-RUN runuser -l __USER_NAME__ -c "pip install --user ipython==7.1.1 ipykernel==5.1.0 --force-reinstall"
+RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
 
 
 #RUN mkdir __PATH_DOCKER_WD__
