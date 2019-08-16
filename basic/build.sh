@@ -9,7 +9,7 @@ GROUP_ID=$(id -g $GROUP_NAME)
 
 #JUPYTER_NOTEBOOK_PASSWORD="sha1:d26c6e60d44c:03ef6d6d1abf65204396087cf141c7dfe460b4b8"
 IMAGE_NAME="ds-env:basic"
-CONTAINER_NAME="ds-env:basic"
+CONTAINER_NAME="ds-env-basic"
 PATH_CONTAINER_MOUNTPOINT="/home/$USER_NAME/mounted_directory"
 
 
