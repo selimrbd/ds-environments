@@ -26,7 +26,7 @@ RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
 
 
 RUN jupyter notebook --generate-config
-CMD runuser -l __USER_NAME__ -c jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --notebook-dir='__PATH_CONTAINER_MOUNTPOINT__'"
+CMD runuser -l __USER_NAME__ -c "jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --notebook-dir='__PATH_CONTAINER_MOUNTPOINT__'"
 
 
 EXPOSE 8888
