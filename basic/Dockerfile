@@ -24,12 +24,8 @@ RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
 
 RUN chown -R __USER_NAME__:__GROUP_NAME__ /usr/local/lib/python3.7
 
-#RUN mkdir __PATH_DOCKER_WD__
-#RUN jupyter notebook --generate-config
-#RUN echo "c.NotebookApp.notebook_dir = '__PATH_DOCKER_WD__'" >> /root/.jupyter/jupyter_notebook_config.py
-#RUN echo "c.NotebookApp.password = '__JUPYTER_NOTEBOOK_PASSWORD__'" >> /root/.jupyter/jupyter_notebook_config.py
-CMD runuser -l __USER_NAME__ -c "if ! test -f '/home/__USER_NAME__/.jupyter/jupyter_notebook_config.py'; then jupyter notebook --generate-config ; fi &&\
-                                jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --notebook-dir='__PATH_CONTAINER_MOUNTPOINT__'"
+RUN jupyter notebook --generate-config
+CMD runuser -l __USER_NAME__ -c "jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --notebook-dir='__PATH_CONTAINER_MOUNTPOINT__'"
 
 
 EXPOSE 8888
