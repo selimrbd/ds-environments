@@ -15,7 +15,7 @@ RUN runuser -l __USER_NAME__ -c "pip install --user --upgrade pip"
 RUN runuser -l __USER_NAME__ -c "pip install --user pandas jupyter scikit-learn pathlib fire"
 
 ## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
-RUN runuser -l __USER_NAME__ -- pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
+RUN runuser -l __USER_NAME__ -c "pip install --user ipython==7.1.1 ipykernel==5.1.0 --force-reinstall"
 
 
 #RUN mkdir __PATH_DOCKER_WD__
