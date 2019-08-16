@@ -19,4 +19,9 @@ sed -i "s@__PATH_DOCKER_WD__@$PATH_DOCKER_WD@g" run.sh
 sed -i "s@__IMAGE_NAME__@$IMAGE_NAME@g" run.sh
 sed -i "s@__CONTAINER_NAME__@$CONTAINER_NAME@g" run.sh
 
+sed -i "s@__USER_NAME__@$USER_NAME@g" Dockerfile
+sed -i "s@__USER_ID__@$USER_ID@g" Dockerfile
+sed -i "s@__GROUP_NAME__@$GROUP_NAME@g" Dockerfile
+sed -i "s@__GROUP_ID__@$GROUP_ID@g" Dockerfile
+
 docker build -t $IMAGE_NAME .
