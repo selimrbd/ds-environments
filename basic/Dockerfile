@@ -7,6 +7,9 @@ RUN groupadd -g __GROUP_ID__ __GROUP_NAME__ &&\
     usermod -aG sudo __USER_NAME__ &&\
     install -d -m 0755 -o __USER_NAME__ -g __GROUP_NAME__ /home/__USER_NAME__
 
+## create the default mount point
+RUN runuser -l __USER_NAME__ -c "mkdir __PATH_CONTAINER_MOUNTPOINT__"
+
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install git python3-pip -y
@@ -26,7 +29,7 @@ RUN chown -R __USER_NAME__:__GROUP_NAME__ /usr/local/lib/python3.7
 #RUN echo "c.NotebookApp.notebook_dir = '__PATH_DOCKER_WD__'" >> /root/.jupyter/jupyter_notebook_config.py
 #RUN echo "c.NotebookApp.password = '__JUPYTER_NOTEBOOK_PASSWORD__'" >> /root/.jupyter/jupyter_notebook_config.py
 CMD runuser -l __USER_NAME__ -c "if ! test -f '/home/__USER_NAME__/.jupyter/jupyter_notebook_config.py'; then jupyter notebook --generate-config ; fi &&\
-                                jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --notebook-dir='__PATH_DOCKER_WD__'"
+                                jupyter notebook --port=8888 --ip=0.0.0.0 --no-browser --notebook-dir='__PATH_CONTAINER_MOUNTPOINT__'"
 
 
 EXPOSE 8888
