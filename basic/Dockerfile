@@ -19,10 +19,6 @@ RUN apt-get install git python3-pip -y
 RUN pip install --upgrade pip
 COPY ./config/requirements.txt /home/selim/requirements.txt
 RUN pip install -r /home/selim/requirements.txt
-#RUN pip install pandas jupyter scikit-learn pathlib fire
-
-## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
-#RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
 
 ## load jupyter notebook default configuration
 RUN runuser -l __USER_NAME__ -c "mkdir /home/__USER_NAME__/.jupyter"
