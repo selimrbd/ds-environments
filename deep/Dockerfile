@@ -18,10 +18,8 @@ RUN apt-get upgrade -y
 RUN apt-get install git -y
 
 RUN pip install --upgrade pip
-RUN pip install pandas scikit-learn 'keras==2.1.6' seaborn Pillow pathlib fire
-
-## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
-RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
+COPY ./config/requirements.txt /home/selim/requirements.txt
+RUN pip install -r /home/selim/requirements.txt
 
 ## load jupyter notebook default configuration
 RUN runuser -l __USER_NAME__ -c "mkdir /home/__USER_NAME__/.jupyter"
@@ -33,6 +31,3 @@ CMD runuser -l __USER_NAME__ -c "jupyter notebook --port=8888 --ip=0.0.0.0 --no-
 
 EXPOSE 8888
 ADD VERSION .
-
-
-
