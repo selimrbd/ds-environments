@@ -12,6 +12,11 @@ RUN pip install pandas jupyter scikit-learn pathlib fire
 ## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
 RUN pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
 
+## create user with same name/id as the host
+RUN groupadd -g __GROUP_ID__ __GROUP_NAME__ &&\
+    useradd -l -u __USER_ID -g __GROUP_NAME__ __USER_NAME__ &&\
+    install -d -m 0755 -o __USER_NAME__ -g __GROUP_NAME__ /home/__USER_NAME__
+
 RUN mkdir __PATH_DOCKER_WD__
 RUN jupyter notebook --generate-config
 RUN echo "c.NotebookApp.notebook_dir = '__PATH_DOCKER_WD__'" >> /root/.jupyter/jupyter_notebook_config.py
