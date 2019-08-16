@@ -9,10 +9,10 @@ RUN groupadd -g __GROUP_ID__ __GROUP_NAME__ &&\
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN runuser -l __USER_NAME__ -c "sudo apt-get install git -y"
-RUN runuser -l __USER_NAME__ -c "sudo apt-get install -y python3-pip"
-RUN runuser -l __USER_NAME__ -c "pip install --upgrade pip"
-RUN runuser -l __USER_NAME__ -c "pip install pandas jupyter scikit-learn pathlib fire"
+RUN apt-get install git python3-pip -y
+
+RUN runuser -l __USER_NAME__ -c "pip install --user --upgrade pip"
+RUN runuser -l __USER_NAME__ -c "pip install --user pandas jupyter scikit-learn pathlib fire"
 
 ## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
 RUN runuser -l __USER_NAME__ -- pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
