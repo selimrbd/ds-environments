@@ -12,8 +12,8 @@ RUN groupadd -g __GROUP_ID__ __GROUP_NAME__ &&\
     install -d -m 0755 -o __USER_NAME__ -g __GROUP_NAME__ /home/__USER_NAME__
 
 
-RUN runuser -l __USER_NAME__ -- pip install --upgrade pip
-RUN runuser -l __USER_NAME__ -- pip install pandas jupyter scikit-learn pathlib fire
+RUN runuser -l __USER_NAME__ -c "pip install --upgrade pip"
+RUN runuser -l __USER_NAME__ -c "pip install pandas jupyter scikit-learn pathlib fire"
 
 ## solves jupyter notebook autocomplete problem (from: https://github.com/jupyterlab/jupyterlab/issues/3672)
 RUN runuser -l __USER_NAME__ -- pip install ipython==7.1.1 ipykernel==5.1.0 --force-reinstall
