@@ -8,61 +8,58 @@ Off-the-shelf development environments for data science using Docker.
 
 Having to re-install your data science environment on a new machine can be painful and time-consuming. It can also be challenging to share a notebook with colleagues that might not have all the dependencies necessary to make it run. It's especially true for deep learning frameworks that require many system dependencies such as CUDA, CudNN, etc.. By encapsulating your development environment in a Docker image, you make it portable and transparent. Easy to redeploy and share !
 
-## Prerequisites
 
-Install Docker >=19.03. For that you can run
+## Build and run the images
+
+### Prerequisites
+
+1/ Install Docker >=19.03. Run:
 ```
-./install_docker.sh
+./utils/setup_docker.sh
 ```
 
-## Get Image from Docker Hub
+2/ For the **deep** version: you also need to install an **NVIDIA Driver**. Run
+```
+./utils/setup_nvidia.sh
+```
 
-## Build the image
+### Build the image
 
-Open build.sh and modify:
-- `PATH_HOST_WD` to the working directory on your local machine (default: your home directory)
-- `JUPYTER_NOTEBOOK_PORT_ON_HOST` if you want jupyter to be exposed on your host on another port than 8888
-
-Then run the script
+For the image of your choice run:
 ```
 ./build.sh
 ```
 
-## Run the image
+This will automatically build the docker image using the same username as the host machine (thus avoiding any permission problems when creating a file with jupyter). **Note:** you can modify some parameters  (jupyter port, working directory, ...) by modifying the corresponding variables in **build.sh**.
 
+### Run the image
 
-```
-docker run \
-  -it \
-  -p 8888:8888 \
-  --rm --name ds-env \
-  --mount type=bind,source="path_host_wd",target="/root/ds-env-data" \
-  selimr/ds-env:basic
-```
-* `path_host_wd`: working directory path on your local machine
-
-
-Alternatively if you have built the Docker Image locally, simply do as a shorthand
 ```
 ./run.sh
 ```
+Will launch a container and jupyter notebook (default port: 8888, default password: `ds-env`)
 
-**NOTE: The default password for the jupyter notebook is 'ds'**
 
-## Modify the image
+## Configuration
 
-You will probably want to modify the environment (install new python libraries, etc.). But once the container is stopped, all changes to the environment will be lost.. To save your modified environment, you have two options.
+### jupyter notebook
 
-### Use Dockerfile (recommended)
+Modify the jupyter notebook configuration by copying your custom **.jupyter** folder into **config/** and re-building the docker image.
 
-Add the instructions to the Dockerfile and rebuild the image. This has the advantage of being reproducible and transparent
+### python libraries
 
-### Commit current state to a new image
+All python libraries are listed in **config/requirements.txt**. If you want to install new python libraries, run in a jupyter notebook cell:
+```
+! pip install name_of_package
+```
+To persist these changes:
+* run a pip freeze command to create a new requirements.txt file
+* transfer it to your mounted directory in the container (default: `/home/username/mounted_directory`)
+* on the host machine, move this new requirements.txt to the config/ folder
+* rebuild the image
 
 Alternatively you can commit the current container to a new image:
 ```
-docker commit -m "What you did to the image" -a "Author Name" container_id repository/new_image_name
+docker commit -m "What you did to the image" -a "Author Name" container_id new_image_name
 ```
-This is quicker than modifying the Dockerfile but lacks reproducibility.
-
-
+This is quicker but lacks reproducibility.
