@@ -18,7 +18,7 @@ RUN apt-get upgrade -y
 RUN apt-get install git -y
 
 RUN pip install --upgrade pip
-COPY ./config/requirements.txt /home/selim/requirements.txt
+COPY ./config/requirements.txt /home/__USER_NAME__/requirements.txt
 RUN pip install -r /home/selim/requirements.txt
 
 ## load jupyter notebook default configuration
