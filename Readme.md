@@ -11,6 +11,8 @@ Having to re-install your data science environment on a new machine can be painf
 
 ## Build and run the images
 
+**IMPORTANT NOTE:** this has been tested on **Ubuntu 18.04**. I am not sure building works on Mac or Windows 
+
 ### Prerequisites
 
 1/ Install Docker >=19.03. Run:
