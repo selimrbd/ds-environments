@@ -7,8 +7,8 @@ USER_ID=$(id -u $USER_NAME)
 GROUP_NAME=$(id -g -n $USER_NAME)
 GROUP_ID=$(id -g $GROUP_NAME)
 
-IMAGE_NAME="ds-env:deep"
-CONTAINER_NAME="ds-env-deep"
+IMAGE_NAME="ds-env:base"
+CONTAINER_NAME="ds-env"
 #PATH_CONTAINER_MOUNTPOINT="/home/$USER_NAME"
 PATH_CONTAINER_MOUNTPOINT="/home/$USER_NAME/mounted_directory"
 
