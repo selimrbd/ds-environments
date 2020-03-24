@@ -17,9 +17,15 @@ RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install git -y
 
+# define base python environment
+RUN conda create -n basic
 RUN pip install --upgrade pip
-COPY ./config/requirements.txt /home/__USER_NAME__/requirements.txt
-RUN pip install -r /home/selim/requirements.txt
+ADD ./config/basic.yml /tmp/basic.yml
+RUN conda env create -f /tmp/basic.yml
+RUN echo "source activate $(head -1 /tmp/basic.yml | cut -d' ' -f2)" > ~/.bashrc
+ENV PATH /opt/conda/envs/$(head -1 /tmp/basic.yml | cut -d' ' -f2)/bin:$PATH
+
+#RUN pip install -r /home/selim/requirements.txt
 
 ## load jupyter notebook default configuration
 RUN runuser -l __USER_NAME__ -c "mkdir /home/__USER_NAME__/.jupyter"
